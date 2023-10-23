@@ -63,7 +63,7 @@ img {
     position: absolute;
     backface-visibility: hidden;
     color: white;
-    font-size: 500%;
+    font-size: 300%;
     display: flex;
     align-items: center;
     justify-content: center;
