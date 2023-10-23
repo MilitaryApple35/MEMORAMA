@@ -1,4 +1,8 @@
 
+* {
+    transition: all 0.5s;
+}
+
 header {
     background-color: #B8D8D8;
     margin: 0;
@@ -19,12 +23,18 @@ body {
     color: #7A9E9F;
 }
 
+img {
+    height: 92%;
+    width: 92%;
+    border-radius: 12px;
+}
+
 #container {
     display: grid;
     grid-template-columns: repeat(4, 200px);
     grid-auto-rows: 200px;
-    column-gap: 30px;
-    row-gap: 30px;
+    column-gap: 20px;
+    row-gap: 20px;
     justify-content: center;
     align-items: center;
     margin: 10px;
@@ -38,20 +48,37 @@ body {
     color: #D88C9A;
 }
 
-.div-carta {
-    height: 100%;
+.div-carta, .carta, .cara {
+    cursor: pointer;
+    height: 200px;
+    width: 200px;
 }
 
 .carta {
-    height: 100%;
-    background-color: #4F6367;
-    border-radius: 10%;
-    -webkit-border-radius: 10%;
-    -moz-border-radius: 10%;
-    -ms-border-radius: 10%;
-    -o-border-radius: 10%;
-    padding: 10px;
+    position: relative;
+    transform-style: preserve-3d;
 }
+
+.cara {
+    position: absolute;
+    backface-visibility: hidden;
+    color: white;
+    font-size: 500%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+}
+
+.frontal {
+    background-color: #0F0424;
+}
+
+.trasera {
+    background-color: #0f042454;
+    transform: rotateY(180deg);
+}
+
 #select{
     background-color: #B8D8D8;
     margin-top: 50px;
