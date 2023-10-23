@@ -2,7 +2,7 @@
     text-align: center;
 }
 
-.container {
+#container {
     display: grid;
     grid-template-columns: repeat(4, 200px);
     grid-auto-rows: 200px;
@@ -11,7 +11,11 @@
     align-items: center;
 }
 
-.tarjeta {
+.div-carta {
     height: 100%;
-    background-color: aquamarine;   
+}
+
+.carta {
+    height: 100%;
+    border-radius: 10px;
 }
