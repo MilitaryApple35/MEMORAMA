@@ -1,11 +1,5 @@
-#div-header{
-    text-align: center;
-    padding-top: 0.25%;
-    padding-bottom: 0.25%;
-    margin: 0;
-    color: #D88C9A;
-}
-header{
+
+header {
     background-color: #B8D8D8;
     margin: 0;
     padding: 0;
@@ -17,13 +11,15 @@ header{
     -o-border-radius: 50px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-body{
+
+body {
     background-color: #7A9E9F;
     padding: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #7A9E9F;
 }
-.container {
+
+#container {
     display: grid;
     grid-template-columns: repeat(4, 200px);
     grid-auto-rows: 200px;
@@ -32,6 +28,14 @@ body{
     justify-content: center;
     align-items: center;
     margin: 10px;
+}
+
+#div-header {
+    text-align: center;
+    padding-top: 0.25%;
+    padding-bottom: 0.25%;
+    margin: 0;
+    color: #D88C9A;
 }
 
 .div-carta {
@@ -48,7 +52,8 @@ body{
     -o-border-radius: 10%;
     padding: 10px;
 }
-footer{
+
+footer {
     height: 50px;
     background-color: #B8D8D8;
     margin-top: 50px;
