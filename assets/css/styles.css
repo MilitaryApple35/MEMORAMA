@@ -52,11 +52,32 @@ body {
     -o-border-radius: 10%;
     padding: 10px;
 }
-
-footer {
-    height: 50px;
+#select{
     background-color: #B8D8D8;
     margin-top: 50px;
-    align-self: center;
-    vertical-align: bottom;
+    padding: 25px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+#button-container{
+    display: grid;
+    grid-template-columns: repeat(3, 15%);
+    grid-auto-rows: 50px;
+    column-gap: 25%;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.modos{
+    background-color: #7A9E9F;
+    color: #B8D8D8;
+    font-size: large;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
 }
