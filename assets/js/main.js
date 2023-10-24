@@ -26,6 +26,7 @@ const generarCuadricula = (cuadricula) => {
     let cartas = [];
     selecciones = [];
     numCartas = cuadricula;
+    puntaje = 0;
     for( let numCarta = 0; numCarta < cuadricula; numCarta++ ){ 
         cartas.push(`
             <div class="div-carta" onclick="seleccionarCarta(${numCarta})" >
