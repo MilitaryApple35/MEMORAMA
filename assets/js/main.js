@@ -1,4 +1,9 @@
+
+// Variables y arreglos globales
+let botonesCuadricula = document.querySelectorAll('.modos');
+
 let selecciones = [];
+
 let imagenes = [
     'image_1.jpg',
     'image_2.jpg',
@@ -12,29 +17,18 @@ let imagenes = [
     'image_10.jpg',
 ];
 
-/*  aquí se buscan lo elementos que coinciden en la clase "modos" y en cada uno de ellos se toma el valor 
-    con la función this.value y ese valor lo pasa a la función que genera la cuadricula */
-document.addEventListener('click', function() {
-    const botones = document.querySelectorAll('.modos');
-    botones.forEach((boton) => {
-        boton.addEventListener('click', function() {
-            const valor = parseInt(this.value);
-            generarCuadricula(valor);
-        });
-    });
-});
-
-const generarCuadricula = (numCartas) => {
+// Funciones
+const generarCuadricula = (cuadricula) => {
     let container = document.getElementById('container');
+    let copiasImg = imagenes.slice();
     let cartas = [];
-    let copiaImg = imagenes.slice();
     selecciones = [];
-    for( let numCarta = 0; numCarta < numCartas; numCarta++ ){ 
+    for( let numCarta = 0; numCarta < cuadricula; numCarta++ ){ 
         cartas.push(`
             <div class="div-carta" onclick="seleccionarCarta(${numCarta})" >
                 <div id="carta_${numCarta}" class="carta">
                     <div id="trasera_${numCarta}" class="cara trasera">
-                        <img src="assets/img/${copiaImgImg[0]}" alt="">
+                        <img src="assets/img/${copiasImg[0]}" alt="">
                     </div>
                     <div class="cara frontal">
                         <i class="fa-solid fa-question"></i>
@@ -43,7 +37,7 @@ const generarCuadricula = (numCartas) => {
             </div>
         `);
         if( numCarta%2 === 1 ) {
-            copiaImgImg.splice(0,1);
+            copiasImg.splice(0,1);
         }
     }
     cartas.sort(() => Math.random() - 0.5);
@@ -78,6 +72,13 @@ const deseleccionar = (selecciones) => {
         }
     }, 800);
 }
+
+// Eventos
+botonesCuadricula.forEach((boton) => {
+    boton.addEventListener('click', () => {
+        generarCuadricula(parseInt(boton.value));
+    });
+});
 
 // LLamar a la funcion principal
 generarCuadricula(12);
