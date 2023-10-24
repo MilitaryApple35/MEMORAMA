@@ -1,4 +1,3 @@
-
 let selecciones = [];
 let imagenes = [
     'image_1.jpg',
