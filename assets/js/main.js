@@ -27,6 +27,8 @@ const generarCuadricula = (cuadricula) => {
     selecciones = [];
     numCartas = cuadricula;
     puntaje = 0;
+    container.classList.remove('fadeIn');
+    container.classList.add('fadeOut');
     for( let numCarta = 0; numCarta < cuadricula; numCarta++ ){ 
         cartas.push(`
             <div class="div-carta" onclick="seleccionarCarta(${numCarta})" >
@@ -46,6 +48,8 @@ const generarCuadricula = (cuadricula) => {
     }
     cartas.sort(() => Math.random() - 0.5);
     container.innerHTML = cartas.join("");
+    container.classList.remove('fadeOut');
+    container.classList.add('fadeIn');
 }
 
 const seleccionarCarta = (numCarta) => {
@@ -78,10 +82,29 @@ const deseleccionar = (selecciones) => {
             puntaje++;
         }
         if(puntaje == (numCartas/2)){
-            alert("Felicidades, has encontrado todos los pares");
+            const main= document.getElementById("main");
+            const alerta = document.createElement("div");
+            alerta.classList.add("alerta");
+            alerta.id= "alerta";
+            alerta.innerHTML = 
+            `
+            <div class="mssgAlerta">
+                <h1>Felicidades!! Has encontrado los pares</h1>
+                <button type="button" id="botonAlerta" onclick="reintentar()">Intentar de nuevo</button>
+            </div>
+            `;
+            main.append(alerta);
         }
     }, 800);
 }
+
+function reintentar(){
+    const alerta=document.getElementById("alerta");
+    alerta.remove();
+    const boton=document.getElementById("btn4x3");
+    boton.click();
+}
+
 /*
 const paresEncontrados = () => {
     if (contador === selecciones.length / 2) {
