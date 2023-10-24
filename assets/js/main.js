@@ -1,8 +1,8 @@
 
 // Variables y arreglos globales
 let botonesCuadricula = document.querySelectorAll('.modos');
-
 let selecciones = [];
+let contador = 0;
 
 let imagenes = [
     'image_1.jpg',
@@ -19,6 +19,7 @@ let imagenes = [
 
 // Funciones
 const generarCuadricula = (cuadricula) => {
+    //alert("Entré e hice la cuadricula");
     let container = document.getElementById('container');
     let copiasImg = imagenes.slice();
     let cartas = [];
@@ -45,6 +46,7 @@ const generarCuadricula = (cuadricula) => {
 }
 
 const seleccionarCarta = (numCarta) => {
+    //alert("Aqui estoy seleccionando las cartas");
     let carta = document.getElementById(`carta_${numCarta}`);
     if( carta.style.transform != "rotateY(180deg)" ) {
         carta.style.transform = "rotateY(180deg)";
@@ -57,22 +59,36 @@ const seleccionarCarta = (numCarta) => {
 }
 
 const deseleccionar = (selecciones) => {
+    //alert("Aqui me metí al deseleccionar");
     setTimeout(() => {
         let cartaUno = document.getElementById(`carta_${selecciones[0]}`);
         let cartaDos = document.getElementById(`carta_${selecciones[1]}`);
         let traseraUno = document.getElementById(`trasera_${selecciones[0]}`);
         let traseraDos = document.getElementById(`trasera_${selecciones[1]}`);
-
+        /*Aqui se valida que las cartas volteadas sean iguales*/
         if( traseraUno.innerHTML != traseraDos.innerHTML ) {
             cartaUno.style.transform = "rotateY(0deg)";
             cartaDos.style.transform = "rotateY(0deg)";
+            //alert("No era par");
         } else {
             traseraUno.style.opacity = "70%";
             traseraDos.style.opacity = "70%";
+            contador++;
+            //alert("Sí es par");
+            if(contador === cuadricula / 2){
+                alert("Felicidades, has encontrado todos los pares");
+            }
         }
     }, 800);
 }
-
+/*
+const paresEncontrados = () => {
+    if (contador === selecciones.length / 2) {
+        alert("Felicidades, has encontrado todos los pares");
+        console.log("Felicidades, has encontrado todos los pares.");
+    }
+}
+*/
 // Eventos
 botonesCuadricula.forEach((boton) => {
     boton.addEventListener('click', () => {
