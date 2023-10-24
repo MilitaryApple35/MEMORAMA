@@ -11,17 +11,21 @@
     <header>
         <div id="div-header"><h1>Memorama - Practica integradora</h1></div>
     </header>
-    <div id="container">
-        <!-- Aquí van los divs con las cartas -->
-    </div>
     <div id="select">
-        <h2>Seleccione el modo de juego:</h2>
-        <div id="button-container">
-            <button class="modos" type="button">4x3</button>
-            <button class="modos" type="button">4x4</button>
-            <button class="modos" type="button">4x5</button>
+            <div id="button-container">
+                <h2>MODO DE JUEGO:</h2>
+                <center>
+                    <button class="modos" type="button" value= "12" onclick="generarCuadricula();">4x3</button>
+                    <button class="modos" type="button" value= "16" onclick="generarCuadricula();">4x4</button>
+                    <button class="modos" type="button" value= "20" onclick="generarCuadricula();">4x5</button>
+                </center>
+            </div>
         </div>
-    </div>
+        <div id="container">
+            <h2>Seleccione el modo de juego:</h2>
+            <!-- Aquí van los divs con las cartas -->
+        </div>
+        
     <script src="assets/js/main.js"></script>
 </body>
 </html>

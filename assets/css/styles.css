@@ -1,6 +1,6 @@
 
 * {
-    transition: all 0.5s;
+    transition: all 1s;
 }
 
 header {
@@ -46,6 +46,7 @@ img {
     padding-bottom: 0.25%;
     margin: 0;
     color: #D88C9A;
+
 }
 
 .div-carta, .carta, .cara {
@@ -80,6 +81,7 @@ img {
 }
 
 #select{
+    float: right;
     background-color: #B8D8D8;
     margin-top: 50px;
     padding: 25px;
@@ -90,21 +92,26 @@ img {
     -ms-border-radius: 10px;
     -o-border-radius: 10px;
 }
+
 #button-container{
-    display: grid;
+    display: inline-block;
     grid-template-columns: repeat(3, 15%);
     grid-auto-rows: 50px;
     column-gap: 25%;
     justify-content: center;
     margin-bottom: 20px;
+    
 }
+
 .modos{
     background-color: #7A9E9F;
     color: #B8D8D8;
     font-size: large;
+    margin: 10px;
     border-radius: 10px;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     -ms-border-radius: 10px;
     -o-border-radius: 10px;
 }
+

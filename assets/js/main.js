@@ -13,16 +13,29 @@ let imagenes = [
     'image_10.jpg',
 ];
 
-const generarCuadricula = () => {
+/*  aquí se buscan lo elementos que coinciden en la clase "modos" y en cada uno de ellos se toma el valor 
+    con la función this.value y ese valor lo pasa a la función que genera la cuadricula */
+document.addEventListener('click', function() {
+    const botones = document.querySelectorAll('.modos');
+    botones.forEach((boton) => {
+        boton.addEventListener('click', function() {
+            const valor = parseInt(this.value);
+            generarCuadricula(valor);
+        });
+    });
+});
+
+const generarCuadricula = (numCartas) => {
     let container = document.getElementById('container');
     let cartas = [];
+    let copiaImg = imagenes.slice();
     selecciones = [];
-    for( let numCarta = 0; numCarta < 12; numCarta++ ){
+    for( let numCarta = 0; numCarta < numCartas; numCarta++ ){ 
         cartas.push(`
             <div class="div-carta" onclick="seleccionarCarta(${numCarta})" >
                 <div id="carta_${numCarta}" class="carta">
                     <div id="trasera_${numCarta}" class="cara trasera">
-                        <img src="assets/img/${imagenes[0]}" alt="">
+                        <img src="assets/img/${copiaImgImg[0]}" alt="">
                     </div>
                     <div class="cara frontal">
                         <i class="fa-solid fa-question"></i>
@@ -31,7 +44,7 @@ const generarCuadricula = () => {
             </div>
         `);
         if( numCarta%2 === 1 ) {
-            imagenes.splice(0,1);
+            copiaImgImg.splice(0,1);
         }
     }
     cartas.sort(() => Math.random() - 0.5);
@@ -61,11 +74,11 @@ const deseleccionar = (selecciones) => {
             cartaUno.style.transform = "rotateY(0deg)";
             cartaDos.style.transform = "rotateY(0deg)";
         } else {
-            traseraUno.style.opacity = "50%";
-            traseraDos.style.opacity = "50%";
+            traseraUno.style.opacity = "70%";
+            traseraDos.style.opacity = "70%";
         }
     }, 800);
 }
 
 // LLamar a la funcion principal
-generarCuadricula();
+generarCuadricula(12);
