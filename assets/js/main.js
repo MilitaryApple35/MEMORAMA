@@ -2,7 +2,8 @@
 // Variables y arreglos globales
 let botonesCuadricula = document.querySelectorAll('.modos');
 let selecciones = [];
-let contador = 0;
+let puntaje = 0;
+let numCartas = 0;
 
 let imagenes = [
     'image_1.jpg',
@@ -24,6 +25,7 @@ const generarCuadricula = (cuadricula) => {
     let copiasImg = imagenes.slice();
     let cartas = [];
     selecciones = [];
+    numCartas = cuadricula;
     for( let numCarta = 0; numCarta < cuadricula; numCarta++ ){ 
         cartas.push(`
             <div class="div-carta" onclick="seleccionarCarta(${numCarta})" >
@@ -69,15 +71,13 @@ const deseleccionar = (selecciones) => {
         if( traseraUno.innerHTML != traseraDos.innerHTML ) {
             cartaUno.style.transform = "rotateY(0deg)";
             cartaDos.style.transform = "rotateY(0deg)";
-            //alert("No era par");
         } else {
             traseraUno.style.opacity = "70%";
             traseraDos.style.opacity = "70%";
-            contador++;
-            //alert("Sí es par");
-            if(contador === cuadricula / 2){
-                alert("Felicidades, has encontrado todos los pares");
-            }
+            puntaje++;
+        }
+        if(puntaje == (numCartas/2)){
+            alert("Felicidades, has encontrado todos los pares");
         }
     }, 800);
 }
