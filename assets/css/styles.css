@@ -164,6 +164,7 @@ img {
     -ms-border-radius: 10px;
     -o-border-radius: 10px;
 }
+
 #botonAlerta{
     background-color: #B8D8D8;
     color: #D88C9A;
@@ -178,4 +179,11 @@ img {
     height: fit-content;
     width: max-content;
     cursor: pointer;
+}
+
+#temporizador {
+    display: inline;
+    font-size: 20px;
+    border: 1px solid black;
+    padding: 10px;
 }

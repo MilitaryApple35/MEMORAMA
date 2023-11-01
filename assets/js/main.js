@@ -4,7 +4,7 @@ let botonesCuadricula = document.querySelectorAll('.modos');
 let selecciones = [];
 let puntaje = 0;
 let numCartas = 0;
-
+let url = "https://memorama-4388a-default-rtdb.firebaseio.com/";
 let imagenes = [
     'image_1.jpg',
     'image_2.jpg',
@@ -98,21 +98,29 @@ const deseleccionar = (selecciones) => {
     }, 800);
 }
 
-function reintentar(){
+function reintentar() {
     const alerta=document.getElementById("alerta");
     alerta.remove();
     const boton=document.getElementById("btn4x3");
     boton.click();
 }
 
-/*
-const paresEncontrados = () => {
-    if (contador === selecciones.length / 2) {
-        alert("Felicidades, has encontrado todos los pares");
-        console.log("Felicidades, has encontrado todos los pares.");
-    }
+function renderTable(data) {
+    let tbody = document.getElementById('alumnosTable');
+    let rowHTML = '';
+
+    Object.keys(data).forEach(key => {
+        rowHTML += `
+            <tr>
+                <td>${data[key].Nombre}</td>
+                <td>${data[key].Tiempo}</td>
+            </tr>
+        `;
+        tbody.innerHTML = rowHTML;
+        console.log(rowHTML);
+    })
 }
-*/
+
 // Eventos
 botonesCuadricula.forEach((boton) => {
     boton.addEventListener('click', () => {
