@@ -26,6 +26,14 @@ const generarCuadricula = (cuadricula) => {
     let cartas = [];
     selecciones = [];
     numCartas = cuadricula;
+    if(numCartas == 20){
+        grid= document.getElementById("container");
+        grid.style.gridTemplateColumns = "repeat(5, minmax(150px, 1fr))";
+    }
+    else{
+        grid= document.getElementById("container");
+        grid.style.gridTemplateColumns = "repeat(4, minmax(150px, 1fr))";
+    }
     puntaje = 0;
     container.classList.remove('fadeIn');
     container.classList.add('fadeOut');
@@ -50,6 +58,7 @@ const generarCuadricula = (cuadricula) => {
     container.innerHTML = cartas.join("");
     container.classList.remove('fadeOut');
     container.classList.add('fadeIn');
+    resetTimer();
 }
 
 const seleccionarCarta = (numCarta) => {
@@ -64,6 +73,48 @@ const seleccionarCarta = (numCarta) => {
         selecciones = [];
     }
 }
+//Cronometro
+let startTime;
+let elapsedTime = 0;
+let timerInterval;
+
+function startTimer() {
+    startTime = Date.now() - elapsedTime;
+    timerInterval = setInterval(function printTime() {
+        elapsedTime = Date.now() - startTime;
+        document.getElementById("temporizador").textContent = formatTime(elapsedTime);
+    }, 10);
+}
+
+function stopTimer() {
+    clearInterval(timerInterval);
+}
+
+function resetTimer() {
+    clearInterval(timerInterval);
+    elapsedTime = 0;
+    document.getElementById("temporizador").textContent = formatTime(elapsedTime);
+    startTimer();
+}
+
+function formatTime(time) {
+    let minutes = Math.floor(time / 60000);
+    let seconds = Math.floor((time % 60000) / 1000);
+    let milliseconds = Math.floor((time % 1000) / 10);
+    return (
+        (minutes < 10 ? "0" : "") +
+        minutes +
+        ":" +
+        (seconds < 10 ? "0" : "") +
+        seconds +
+        "." +
+        (milliseconds < 10 ? "0" : "") +
+        milliseconds
+    );
+}
+
+// Start the timer
+startTimer();
 
 const deseleccionar = (selecciones) => {
     //alert("Aqui me metí al deseleccionar");
@@ -82,6 +133,7 @@ const deseleccionar = (selecciones) => {
             puntaje++;
         }
         if(puntaje == (numCartas/2)){
+            stopTimer();
             const main= document.getElementById("main");
             const alerta = document.createElement("div");
             alerta.classList.add("alerta");
@@ -103,6 +155,7 @@ function reintentar() {
     alerta.remove();
     const boton=document.getElementById("btn4x3");
     boton.click();
+    resetTimer();
 }
 
 function renderTable(data) {
@@ -127,6 +180,8 @@ botonesCuadricula.forEach((boton) => {
         generarCuadricula(parseInt(boton.value));
     });
 });
+
+
 
 // LLamar a la funcion principal
 generarCuadricula(12);
