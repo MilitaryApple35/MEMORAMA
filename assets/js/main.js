@@ -99,6 +99,9 @@ function comenzar() {
         timer.textContent = `Time: ${seconds}`; 
     }, 100);
 }
+function detenertiempo(){
+    clearInterval(timerInterval);
+}
 
 //aquí le puse un input para que mostrara el nombre a ingresar
 const deseleccionar = (selecciones) => {
@@ -122,6 +125,7 @@ const deseleccionar = (selecciones) => {
             const alerta = document.createElement("div");
             alerta.classList.add("alerta");
             alerta.id= "alerta";
+            detenertiempo();
             alerta.innerHTML = 
             `
             <div class="mssgAlerta">
