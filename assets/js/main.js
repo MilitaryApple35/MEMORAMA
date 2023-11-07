@@ -1,10 +1,19 @@
 
 // Variables y arreglos globales
 let botonesCuadricula = document.querySelectorAll('.modos');
+const timer = document.getElementById("timer");
 let selecciones = [];
 let puntaje = 0;
 let numCartas = 0;
+let timerInterval;
+let rows = 0;
+let columns = 0;
+let tiempo = 0;
+let seconds = 0;
+let usuarios = 0;
+//Conexión a la base de datos
 let url = "https://memorama-4388a-default-rtdb.firebaseio.com/";
+
 let imagenes = [
     'image_1.jpg',
     'image_2.jpg',
@@ -17,8 +26,11 @@ let imagenes = [
     'image_9.jpg',
     'image_10.jpg',
 ];
-
+/*  Tengo que pedir el nombre al terminar el memorama, que el tiempo empiece cuando le pique a jugar
+    y que pare cuando el memorama esté terminado.
+*/
 // Funciones
+//Función que generá el cuadro
 const generarCuadricula = (cuadricula) => {
     //alert("Entré e hice la cuadricula");
     let container = document.getElementById('container');
@@ -58,7 +70,7 @@ const generarCuadricula = (cuadricula) => {
     container.innerHTML = cartas.join("");
     container.classList.remove('fadeOut');
     container.classList.add('fadeIn');
-    resetTimer();
+    comenzar();
 }
 
 const seleccionarCarta = (numCarta) => {
@@ -73,49 +85,22 @@ const seleccionarCarta = (numCarta) => {
         selecciones = [];
     }
 }
+
 //Cronometro
-let startTime;
-let elapsedTime = 0;
-let timerInterval;
-
-function startTimer() {
-    startTime = Date.now() - elapsedTime;
-    timerInterval = setInterval(function printTime() {
-        elapsedTime = Date.now() - startTime;
-        document.getElementById("temporizador").textContent = formatTime(elapsedTime);
-    }, 10);
-}
-
-function stopTimer() {
+//Borré lo que hizo el pablito e hice este timer
+function comenzar() {
     clearInterval(timerInterval);
+    tiempo = 0;
+    seconds = 0;
+    timerInterval = setInterval(function () {
+        tiempo += 100;
+        const totSegundos = tiempo / 1000;
+        const seconds = totSegundos.toFixed(1);
+        timer.textContent = `Time: ${seconds}`; 
+    }, 100);
 }
 
-function resetTimer() {
-    clearInterval(timerInterval);
-    elapsedTime = 0;
-    document.getElementById("temporizador").textContent = formatTime(elapsedTime);
-    startTimer();
-}
-
-function formatTime(time) {
-    let minutes = Math.floor(time / 60000);
-    let seconds = Math.floor((time % 60000) / 1000);
-    let milliseconds = Math.floor((time % 1000) / 10);
-    return (
-        (minutes < 10 ? "0" : "") +
-        minutes +
-        ":" +
-        (seconds < 10 ? "0" : "") +
-        seconds +
-        "." +
-        (milliseconds < 10 ? "0" : "") +
-        milliseconds
-    );
-}
-
-// Start the timer
-startTimer();
-
+//aquí le puse un input para que mostrara el nombre a ingresar
 const deseleccionar = (selecciones) => {
     //alert("Aqui me metí al deseleccionar");
     setTimeout(() => {
@@ -132,8 +117,7 @@ const deseleccionar = (selecciones) => {
             traseraDos.style.opacity = "70%";
             puntaje++;
         }
-        if(puntaje == (numCartas/2)){
-            stopTimer();
+        if(puntaje === (numCartas/2)){
             const main= document.getElementById("main");
             const alerta = document.createElement("div");
             alerta.classList.add("alerta");
@@ -141,7 +125,8 @@ const deseleccionar = (selecciones) => {
             alerta.innerHTML = 
             `
             <div class="mssgAlerta">
-                <h1>Felicidades!! Has encontrado los pares</h1>
+                <h1>¡FELICIDADES!  HAS GANADO</h1>
+                <input type="text" id="playerName" placeholder="Ingrese su nombre:">
                 <button type="button" id="botonAlerta" onclick="reintentar()">Intentar de nuevo</button>
             </div>
             `;
@@ -150,37 +135,117 @@ const deseleccionar = (selecciones) => {
     }, 800);
 }
 
+//función con la acción de volver estando ingresando el nombre del jugador
+function Volver() {
+    const playerNameInput = document.getElementById("playerName");
+    aggUser(playerNameInput.value);
+    playerNameInput.value = "";
+    const ventana = document.getElementById("ventana");
+    ventana.style.top = "100%";
+    changeBoardSize(rows, columns);
+    UpdateScores();
+}
+
 function reintentar() {
     const alerta=document.getElementById("alerta");
     alerta.remove();
     const boton=document.getElementById("btn4x3");
     boton.click();
-    resetTimer();
+    comenzar();
+}
+
+
+//agregar records 
+//Esto va conectado a la base de datos
+function NewUser(data) {
+    const playerName = data;
+    let timefor = (tiempo / 100) / 10;
+    if (rows == 4 && columns == 3) {
+        let user = {
+            nombre: playerName,
+            tiempo: timefor,
+            dim: 3
+        }
+        fetch(`${url}/users3.json`, {
+            method: 'POST',
+            body: JSON.stringify(user, null, 2),
+            headers: { 'Content-type': 'application/json; charset=UTF-8' }
+        })
+            .then(response => response.json())
+            .catch(error => console.error("Ha ocurrido un error: ", error));
+    }
+    else if (rows == 4 && columns == 4) {
+        let user = {
+            nombre: playerName,
+            tiempo: timefor,
+            dim: 4
+        }
+        fetch(`${url}/users4.json`, {
+            method: 'POST',
+            body: JSON.stringify(user, null, 2),
+            headers: { 'Content-type': 'application/json; charset=UTF-8' }
+        })
+            .then(response => response.json())
+            .catch(error => console.error("Ha ocurrido un error: ", error));
+    }
+    else if (rows == 4 && columns == 5) {
+        let user = {
+            nombre: playerName,
+            tiempo: timefor,
+            dim: 4
+        }
+        fetch(`${url}/users5.json`, {
+            method: 'POST',
+            body: JSON.stringify(user, null, 2),
+            headers: { 'Content-type': 'application/json; charset=UTF-8' }
+        })
+            .then(response => response.json())
+            .catch(error => console.error("Ha ocurrido un error: ", error));
+    }
 }
 
 function renderTable(data) {
     let tbody = document.getElementById('alumnosTable');
     let rowHTML = '';
-
-    Object.keys(data).forEach(key => {
-        rowHTML += `
-            <tr>
-                <td>${data[key].Nombre}</td>
-                <td>${data[key].Tiempo}</td>
-            </tr>
-        `;
-        tbody.innerHTML = rowHTML;
-        console.log(rowHTML);
-    })
+    const sortedData = Object.keys(data).map(key => data[key]).sort((a, b) => a.tiempo - b.tiempo).slice(0, 10);
+    sortedData.forEach((item, index) => {
+        const position = index + 1;
+        rowHTML += `<tr>
+            <td>${item.nombre}</td>
+            <td>${item.tiempo} seg</td>
+            </tr>`;
+    });
+    tbody.innerHTML = rowHTML;
 }
-
+//Actualizar tabla de posiciones
+//Esto va conectado a la base de datos
+async function UpdateScores() {
+    try {
+        if (rows == 4 && columns == 3) {
+            const response = await fetch(`${url}/users3.json`);
+            const usuarios = await response.json();
+            renderTable(usuarios);
+        }
+        else if (rows == 4 && columns == 4) {
+            const response = await fetch(`${url}/users4.json`);
+            const usuarios = await response.json();
+            renderTable(usuarios);
+        }
+        else if (rows == 4 && columns == 5) {
+            const response = await fetch(`${url}/users5.json`);
+            const usuarios = await response.json();
+            renderTable(usuarios);
+        }
+    } catch (error) {
+        console.error("Ha ocurrido un error: ", error);
+    }
+}
 // Eventos
 botonesCuadricula.forEach((boton) => {
     boton.addEventListener('click', () => {
         generarCuadricula(parseInt(boton.value));
     });
 });
-
 
 
 // LLamar a la funcion principal
