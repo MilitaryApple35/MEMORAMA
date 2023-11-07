@@ -128,9 +128,15 @@ img {
     place-items: center;
 }
 /*Para la tabla de posiciones*/
-#leaderboard td, #leaderboard th {
-    border: 1px solid #7A9E9F;
+#leaderboard td, #leaderboard th, #leaderboard tr {
+    border: 3px solid #7A9E9F;
     padding: 8px;
+    border-collapse: collapse;
+}
+
+#leaderboard {
+    padding: 30px;
+    border-collapse: collapse;
 }
 /*Para la tabla de posiciones*/
 #btn-comenzar {
@@ -138,9 +144,10 @@ img {
     place-items: center;
     background-color: #7A9E9F;
     color: #B8D8D8;
-    font-size: 300%;
+    font-size: 200%;
     margin: 5%;
     border-radius: 10px;
+    padding: 10px 30px 10px;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     -ms-border-radius: 10px;

@@ -20,14 +20,14 @@
             <div>
             <div id="leaderboard">
                 <h2>Leaderboard</h2>
-                <table>
+                <table >
                     <thead>
                         <tr>
                             <th>Names</th>
-                            <th>Time</th>
+                            <th>Time (sec)</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="leaderboard-body">
                         
                     </tbody>
                 </table>
@@ -35,9 +35,8 @@
             </div>
         </div>
         <div class="grid" id="selector">
-
             <div id="div-boton">
-                <button type="button" id="btn-comenzar" onclick="comenzar()">Jugar</button>
+                <button type="button" id="btn-comenzar" onclick="reiniciar()">Reiniciar</button>
             </div>
             <div class="tiempo">
                 <p id="timer">00:00</p>
@@ -45,7 +44,7 @@
 
             <div id="select">
                 <div id="button-container">
-                    <p>Seleccione un modo de juego:</p>
+                    <p>Seleccione un tamaño:</p>
                     <button class="modos" type="button" value="12" id="btn4x3"><h2 style="margin: 0;">4X3</h2></button>
                     <button class="modos" type="button" value="16"><h2 style="margin: 0;">4X4</h2></button>
                     <button class="modos" type="button" value="20"><h2 style="margin: 0;">4X5</h2></button>
