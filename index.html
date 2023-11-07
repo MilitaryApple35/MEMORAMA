@@ -10,23 +10,49 @@
 <body>
     <div id="main">
         <header>
-            <div id="div-header"><h1>Memorama - Practica integradora</h1></div>
+                
         </header>
         <div class="grid">
             <div id="container">
                 <h2>Seleccione el modo de juego:</h2>
                 <!-- Aquí van los divs con las cartas -->
             </div>
+            <div>
+            <div id="leaderboard">
+                <h2>Leaderboard</h2>
+                <table >
+                    <thead>
+                        <tr>
+                            <th>Names</th>
+                            <th>Time (sec)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="leaderboard-body">
+                        
+                    </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+        <div class="grid" id="selector">
+            <div id="div-boton">
+                <button type="button" id="btn-comenzar" onclick="reiniciar()">Reiniciar</button>
+            </div>
+            <div class="tiempo">
+                <p id="timer">00:00</p>
+            </div>
+
             <div id="select">
                 <div id="button-container">
-                    <h2 style="display: flex; align-items: center; justify-content: center; margin: 0;">MODOS DE JUEGO:</h2>
+                    <p>Seleccione un tamaño:</p>
                     <button class="modos" type="button" value="12" id="btn4x3"><h2 style="margin: 0;">4X3</h2></button>
                     <button class="modos" type="button" value="16"><h2 style="margin: 0;">4X4</h2></button>
                     <button class="modos" type="button" value="20"><h2 style="margin: 0;">4X5</h2></button>
                 </div>
             </div>
-        </div>   
+        </div>
         <script src="assets/js/main.js"></script>
     </div>
+
 </body>
 </html>
