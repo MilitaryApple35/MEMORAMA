@@ -162,7 +162,7 @@ function reintentar() {
     NewUser(playerName.value);
     const alerta = document.getElementById("alerta");
     alerta.remove();
-    const boton=document.getElementById("btn4x3");
+    const boton=document.getElementById("btn-comenzar");
     boton.click();
     comenzar();
 }
